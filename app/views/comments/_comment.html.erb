@@ -1,0 +1,22 @@
+<p>
+  <strong>Commenter :</strong>
+  <%= comment.commenter %><br> <%# &emsp;&emsp;&emsp;&emsp;%>
+  <%= comment.created_at %>
+</p>
+
+<p>
+  <strong>Comment</strong>
+  <% if comment.created_at != comment.updated_at %>
+    <i>(Edited)</i>
+  <% end %>
+  <strong>: </strong>
+  <%= comment.body %>
+</p>
+
+<% if user_signed_in? %>
+  <ul>
+    <li><%= link_to "Edit", edit_article_comment_path(@article, comment) %></li>
+    <li><%= link_to "Delete", article_comment_path(@article, comment), data: { turbo_method: :delete, turbo_confirm: "Are you Sure you want to Delete the Comment?" }, class: "text-red-500" %></li>
+  </ul>
+<% end %>
+<br>

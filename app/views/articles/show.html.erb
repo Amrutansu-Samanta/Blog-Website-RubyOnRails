@@ -1,0 +1,21 @@
+<h1><%= @article.title %></h1>
+
+<p><%= @article.body %></p>
+
+<% if user_signed_in? %>
+<ul>
+  <li><%= link_to "Edit", edit_article_path(@article) %></li>
+  <li><%= link_to "Delete", article_path(@article), data: { turbo_method: :delete, turbo_confirm: "Are you Sure you want to Delete the Article?" }, class: "text-red-500" %></li>
+</ul>
+<% end %>
+<hr>
+<h2>Comments</h2>
+<div class="flex flex-row">
+<div class="basis-1/2">
+<%= render @article.comments %>
+</div>
+<div class="basis-1/4">
+<h2>Add a Comment:</h2>
+<%= render "comments/form", article: @article, comment: @article.comments.build %>
+  </div>
+</div>
